@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 """
 File: checkin.py(GLaDOS签到)
 Author: Hennessey

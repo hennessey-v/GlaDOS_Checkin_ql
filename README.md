@@ -52,6 +52,12 @@ ql repo https://github.com/hennessey-v/GlaDOS_Checkin_ql.git "checkin.py" "backU
 
 ## 更新日志
 
+### [1.1.0] - 2023-01-29
+
+#### 变更
+- 修复拉取脚本无法自动添加任务的问题
+- 文档更新
+
 ### [1.0.0] - 2023-01-12
 
 项目发布
