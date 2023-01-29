@@ -1,5 +1,14 @@
-import requests,json,os,sys,time
+"""
+File: checkin.py(GLaDOS签到)
+Author: Hennessey
+Date: 2023/1/12 9:01
+cron: 40 0 * * *
+new Env('GLaDOS签到');
+Update: 2023/1/29 更新描述信息
+"""
 
+
+import requests,json,os,sys,time
 
 # 在青龙面板环境变量添加GR_COOKIE，并登录https://glados.rocks，按f12--网络获取cookie
 def get_cookies():
