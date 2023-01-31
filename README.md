@@ -43,6 +43,12 @@ GLaDOS家的优惠活动非常良心，新账号注册一段时间后基本都�
 
 - 多账号多次添加，运行脚本将自动遍历变量
 ## 三、在青龙中拉取本仓库
+
+- 国内环境拉取指令（带代理）
+```
+ql repo https://ghproxy.com/https://github.com/hennessey-v/GlaDOS_Checkin_ql.git "checkin.py" "backUp|assets|README.md" "sendNotify.py"
+```
+- 国外环境拉取指令
 ```
 ql repo https://github.com/hennessey-v/GlaDOS_Checkin_ql.git "checkin.py" "backUp|assets|README.md" "sendNotify.py"
 ```
@@ -51,6 +57,10 @@ ql repo https://github.com/hennessey-v/GlaDOS_Checkin_ql.git "checkin.py" "backU
 ![cookie](assets/push_detail.png)
 
 ## 更新日志
+### [1.1.1] - 2023-01-31
+
+#### 变更
+- 添加了国内环境下的拉取指令
 
 ### [1.1.0] - 2023-01-29
 
