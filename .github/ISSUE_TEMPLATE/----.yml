@@ -1,0 +1,31 @@
+name: ✨功能请求
+description: 为这个项目提出一个想法，请先查看常见问题及搜索issue列表中有无你要提的问题
+title: "[Feature]: "
+body:
+- type: checkboxes
+  id: check-answer
+  attributes:
+    label: 解决方案检查
+    description: 请确保你已完成以下所有操作
+    options:
+      - label: 我已搜索issue列表(<https://github.com/hennessey-v/GlaDOS_Checkin_ql/issues?utf8=✓&q=>)，但没有发现类似的问题
+        required: true
+- type: textarea
+  id: problem-description
+  attributes:
+    label: 问题描述
+    description: 请添加清晰简洁的描述，说明你希望通过此功能请求解决的问题
+  validations:
+    required: true
+- type: textarea
+  id: proposed-solution
+  attributes:
+    label: 描述你想要的解决方案
+    description: 简洁明了地描述你要发生的事情
+  validations:
+    required: true
+- type: textarea
+  id: additional-information
+  attributes:
+    label: 附加信息
+    description: 如果你的问题需要进一步解释，或者想要表达其他内容，请在此处添加更多信息。（直接把图片、视频拖到编辑框即可添加图片或视频）

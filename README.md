@@ -58,26 +58,20 @@ ql repo https://github.com/hennessey-v/GlaDOS_Checkin_ql.git "checkin.py" "backU
 
 ## 更新日志
 ### [1.1.1] - 2023-01-31
-
-#### 变更
+#### 新增
 - 添加了国内环境下的拉取指令
+- 新增问题模板
 
 ### [1.1.0] - 2023-01-29
-
 #### 变更
 - 修复拉取脚本无法自动添加任务的问题
 - 文档更新
 
 ### [1.0.0] - 2023-01-12
-
 项目发布
-
 #### 变更
-
 - 兼容多账户，推送信息增加账户邮箱信息提示
-
 #### 新增
-
 - 多账号签到
 - 多种推送渠道
   - Bark服务
@@ -90,6 +84,7 @@ ql repo https://github.com/hennessey-v/GlaDOS_Checkin_ql.git "checkin.py" "backU
 
 ## 鸣谢
 - 部分程序代码来源于开源项目[glados_checkin](https://github.com/akinlau/glados_checkin)，此外md文档风格及部分内容借鉴于[DullSword](https://github.com/DullSword)大佬
+- 问题模板灵感来自于开源项目[lx-music-desktop](https://github.com/lyswhut/lx-music-desktop)
 
 
 ## Star⭐
