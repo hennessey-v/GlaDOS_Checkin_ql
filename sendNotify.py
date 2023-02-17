@@ -286,7 +286,7 @@ def wecom_app(title, content):
             media_id = ''
         wx = WeCom(corpid, corpsecret, agentid)
         # 如果没有配置 media_id 默认就以 text 方式发送
-        if media_id == '1':
+        if not media_id:
             message = title + '\n\n' + content
             response = wx.send_text(message, touser)
         else:
