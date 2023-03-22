@@ -4,53 +4,56 @@
 """
 File: checkin.py(GLaDOS签到)
 Author: Hennessey
-Date: 2023/1/12 9:01
+Date: 2023/3/22 18:59
 cron: 40 0 * * *
 new Env('GLaDOS签到');
-Update: 2023/1/29 更新描述信息
+Update: 2023/3/22 优化逻辑
 """
 
 
-import requests,json,os,sys,time
+import requests
+import json
+import os
+import sys
+import time
 
-# 在青龙面板环境变量添加GR_COOKIE，并登录https://glados.rocks，按f12--网络获取cookie
+# 获取青龙面板环境变量中的GlaDOS账号Cookie
 def get_cookies():
-    CookieGRs = []
+    cookies = []
     if os.environ.get("GR_COOKIE"):
         print("已获取并使用Env环境 Cookie")
         if '&' in os.environ["GR_COOKIE"]:
-            CookieGRs = os.environ["GR_COOKIE"].split('&')
+            cookies = os.environ["GR_COOKIE"].split('&')
         elif '\n' in os.environ["GR_COOKIE"]:
-            CookieGRs = os.environ["GR_COOKIE"].split('\n')
+            cookies = os.environ["GR_COOKIE"].split('\n')
         else:
-            CookieGRs = [os.environ["GR_COOKIE"]]
-        # return CookieGRs
+            cookies = [os.environ["GR_COOKIE"]]
     else:
-        print("未获取到正确✅格式的GlaDOS账号Cookie")
+        print("未获取到正确的GlaDOS账号Cookie")
         return
+    print(f"共获取到{len(cookies)}个GlaDOS账号Cookie\n")
+    print(f"脚本执行时间(北京时区): {time.strftime('%Y/%m/%d %H:%M:%S', time.localtime())}\n")
+    return cookies
 
-    print(f"====================共{len(CookieGRs)}个GlaDOS账号Cookie=========\n")
-    print(f"==================脚本执行- 北京时间(UTC+8)：{time.strftime('%Y/%m/%d %H:%M:%S', time.localtime())}=====================\n")
-    return CookieGRs
 
-
+# 加载通知服务
 def load_send():
-    global send
     cur_path = os.path.abspath(os.path.dirname(__file__))
     sys.path.append(cur_path)
     if os.path.exists(cur_path + "/sendNotify.py"):
         try:
             from sendNotify import send
-        except:
-            send=False
-            print("加载通知服务失败~")
+            return send
+        except Exception as e:
+            print(f"加载通知服务失败：{e}")
+            return None
     else:
-        send=False
-        print("加载通知服务失败~")
+        print("加载通知服务失败")
+        return None
 
 
-def checkin(e): 
-    cookie = e
+# GlaDOS签到
+def checkin(cookie):
     checkin_url= "https://glados.rocks/api/user/checkin"
     state_url= "https://glados.rocks/api/user/status"
     referer = 'https://glados.rocks/console/checkin'
@@ -73,26 +76,44 @@ def checkin(e):
             'user-agent':useragent})
     except Exception as e:
         print(f"签到失败，请检查网络：{e}")
-    mess = checkin.json()['message']
-    mail = state.json()['data']['email']
-    time = state.json()['data']['leftDays']
-    time = time.split('.')[0]
-    return mess,time,mail
+        return None, None, None
+    
+    try:
+        mess = checkin.json()['message']
+        mail = state.json()['data']['email']
+        time = state.json()['data']['leftDays'].split('.')[0]
+    except Exception as e:
+        print(f"解析登录结果失败：{e}")
+        return None, None, None
+    
+    return mess, time, mail
 
+
+# 执行签到任务
 def run_checkin():
-    tempcontent = tempcontents = ""
+    contents = []
     cookies = get_cookies()
-    for i in cookies:
-        cookie = i
-        ret,remain,email = checkin(cookie)
+    if not cookies:
+        return ""
+
+    for cookie in cookies:
+        ret, remain, email = checkin(cookie)
+        if not ret:
+            continue
+            
         content = f"账号：{email}\n签到结果：{ret}\n剩余天数：{remain}\n\n"
-        tempcontent = tempcontents
-        tempcontents =  tempcontent + content
-    print(tempcontents)
-    return tempcontents
+        contents.append(content)
+
+    contents_str = "".join(contents)
+    print(contents_str)
+    return contents_str
+
 
 if __name__ == '__main__':
     title = "GlaDOS签到通知"
     contents = run_checkin()
-    load_send()
-    send(title,contents)
+    send_notify = load_send()
+    if send_notify:
+        if contents =='':
+            contents=f'信息获取失败，请检查账户信息以及青龙网络环境'
+        send_notify(title, contents)

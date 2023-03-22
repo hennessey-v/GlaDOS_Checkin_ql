@@ -60,6 +60,12 @@ ql repo https://github.com/hennessey-v/GlaDOS_Checkin_ql.git "checkin.py" "backU
 
 ## 更新日志
 
+### [1.2.0] - 2023-03-22
+#### 变更
+- 优化逻辑，增强运行稳定性。
+- 修复了空Cookie导致的报错。
+- 完善注释，增强可读性。
+
 ### [1.1.2] - 2023-02-17
 #### 变更
 - 修复企业微信应用文本方式推送错误（感谢[肥牛（sailcom）](https://github.com/sailcom)）
