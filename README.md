@@ -1,8 +1,30 @@
+
+<div align="center">
+
 # GLaDOS 自动签到⚡
 
+_✨ 基于 [Python](https://www.python.org/) 实现的[GLaDOS](https://github.com/glados-network/GLaDOS)签到程序 ✨_  
+
+</div>
+
+<p align="center">
+  <a href="https://github.com/hennessey-v/GlaDOS_Checkin_ql/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/hennessey-v/GlaDOS_Checkin_ql?color=%23ed793a" alt="license">
+  </a>
+  <a href="https://www.python.org/">
+    <img src="https://img.shields.io/badge/python-3.9%2B-blue" alt="license">
+  </a>
+  <a href="https://github.com/hennessey-v/GlaDOS_Checkin_ql/">
+    <img src="https://img.shields.io/github/stars/hennessey-v/GlaDOS_Checkin_ql?color=%2330c352" alt="license">
+  </a>
+</p>
+
+## 项目特点
+
 - 基于 [Python](https://www.python.org/)语言
-- 可自定义签到时间（crontab）
+- 可自定义签到时间（基于crontab）
 - 支持多账户
+- 支持本地部署
 - 支持部署在[青龙面板](https://github.com/whyour/qinglong)
 - 支持多种通知推送方式
 - [更新日志](#更新日志)
@@ -15,14 +37,17 @@ GLaDOS家的优惠活动非常良心，新账号注册一段时间后基本都�
 
 [GLaDOS 项目地址](https://github.com/glados-network/GLaDOS)
 
-## 使用说明
+## 开始使用
 
-### 一、准备工作
+### 准备工作
+<details>
+<summary>账号的 cookie（并非仅此单一获取方式）</summary>
 
-- 账号的 cookie（并非仅此单一获取方式）
-
-  1. 注册 [GLaDos](https://glados.rocks/) 并登陆。
-  （注册时选填邀请码 38JNV-P6O0T-XXC1F-CC3OI ，双方都将获得额外的天数奖励。这一步并不重要，但我期待并感谢大家的支持）
+  1. 注册 [GLaDos](https://glados.rocks/) 并登陆。  
+  （注册时可选填邀请码，双方都将获得微量的额外天数奖励。这一步并不重要，但我期待并感谢大家的支持）
+   ```
+   38JNV-P6O0T-XXC1F-CC3OI
+   ```
 
   2. 在首页往下拉，找到 **我的会员 > 会员签到**
 
@@ -39,12 +64,20 @@ GLaDOS家的优惠活动非常良心，新账号注册一段时间后基本都�
   5. 在签到页面点击签到，相对应的开发者工具 **network** 标签下会出现 "**checkin**" 请求，点击该请求，会出现更多信息，找到 "**Request Headers**" 里的 "**cookie**"，接下来设置密钥时需要用到
 
      ![cookie](assets/cookie.png)
-## 二、在青龙面板中设置环境变量
+</details>
+
+### qinglong 部署 (推荐)
+
+<details>
+<summary>一、在青龙面板中设置环境变量</summary>
 
 ![cookie](assets/GR_cookie.png)
 
 - 多账号多次添加，运行脚本将自动遍历变量
-## 三、在青龙中拉取本仓库
+</details>
+
+<details>
+<summary>二、在青龙中拉取本仓库</summary>
 
 - 国内环境拉取指令（带代理）
 ```
@@ -54,11 +87,60 @@ ql repo https://ghproxy.com/https://github.com/hennessey-v/GlaDOS_Checkin_ql.git
 ```
 ql repo https://github.com/hennessey-v/GlaDOS_Checkin_ql.git "checkin.py" "backUp|assets|README.md" "sendNotify.py"
 ```
-## 四、运行脚本查看运行结果
+</details>
+
+<details>
+<summary>三、运行脚本查看运行结果</summary>
 
 ![cookie](assets/push_detail.png)
 
+</details>
+
+### 本机部署
+
+<details>
+<summary>一、拉取仓库到本地</summary>
+
+- 国内环境拉取指令（带代理）
+```
+git clone https://ghproxy.com/https://github.com/hennessey-v/GlaDOS_Checkin_ql.git GlaDOS_Checkin
+```
+- 国外环境拉取指令
+```
+git clone https://github.com/hennessey-v/GlaDOS_Checkin_ql.git GlaDOS_Checkin
+```
+</details>
+<details>
+<summary>二、配置cookie</summary>
+
+- 进入 GlaDOS_Checkin 文件夹，将cookie按照 **'koa:sess=xxxxxxxxx; koa:sess.sig=xxxx;'** 的格式填入 **config.py** ，多账号用 "," 分割
+
+</details>
+<details>
+<summary>三、运行脚本</summary>
+
+- 在GlaDOS_Checkin目录下，运行脚本
+```
+python checkin.py
+```
+
+- linux可配和[crontab](https://www.runoob.com/linux/linux-comm-crontab.html)实现定时签到，windows可使用[go-crontab](https://github.com/hezhizheng/go-crontab/releases)来实现。具体用法请自行探索
+
+</details>
+
+
+
 ## 更新日志
+<details>
+<summary>更新日志</summary>
+
+### [1.2.1] - 2023-5-7
+#### 新增
+- 新增本地部署
+- 新增运行失败提示
+#### 变更
+- 优化运行中信息显示效果
+- 完善文档
 
 ### [1.2.0] - 2023-03-22
 #### 变更
@@ -95,9 +177,10 @@ ql repo https://github.com/hennessey-v/GlaDOS_Checkin_ql.git "checkin.py" "backU
   - 企业微信BOT
   - 微信推送Plus+
 
+</details>
 
 ## 鸣谢
-- 部分程序代码来源于开源项目[glados_checkin](https://github.com/akinlau/glados_checkin)，此外md文档风格及部分内容借鉴于[DullSword](https://github.com/DullSword)大佬
+- 部分程序代码来源于开源项目[glados_checkin](https://github.com/akinlau/glados_checkin)，部分图片素材来自于[DullSword](https://github.com/DullSword)大佬
 - 问题模板灵感来自于开源项目[lx-music-desktop](https://github.com/lyswhut/lx-music-desktop)
 
 

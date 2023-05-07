@@ -7,7 +7,7 @@ Author: Hennessey
 Date: 2023/3/22 18:59
 cron: 40 0 * * *
 new Env('GLaDOS签到');
-Update: 2023/3/22 优化逻辑
+Update: 2023/5/7 优化信息输出效果,新增本地运行
 """
 
 
@@ -17,9 +17,8 @@ import os
 import sys
 import time
 
-# 获取青龙面板环境变量中的GlaDOS账号Cookie
+# 获取GlaDOS账号Cookie
 def get_cookies():
-    cookies = []
     if os.environ.get("GR_COOKIE"):
         print("已获取并使用Env环境 Cookie")
         if '&' in os.environ["GR_COOKIE"]:
@@ -29,8 +28,11 @@ def get_cookies():
         else:
             cookies = [os.environ["GR_COOKIE"]]
     else:
-        print("未获取到正确的GlaDOS账号Cookie")
-        return
+        from config import Cookies
+        cookies = Cookies
+        if len(cookies) == 0:
+            print("未获取到正确的GlaDOS账号Cookie")
+            return
     print(f"共获取到{len(cookies)}个GlaDOS账号Cookie\n")
     print(f"脚本执行时间(北京时区): {time.strftime('%Y/%m/%d %H:%M:%S', time.localtime())}\n")
     return cookies
@@ -101,11 +103,11 @@ def run_checkin():
         if not ret:
             continue
             
-        content = f"账号：{email}\n签到结果：{ret}\n剩余天数：{remain}\n\n"
+        content = f"账号：{email}\n签到结果：{ret}\n剩余天数：{remain}\n"
+        print(content)
         contents.append(content)
 
     contents_str = "".join(contents)
-    print(contents_str)
     return contents_str
 
 
@@ -115,5 +117,7 @@ if __name__ == '__main__':
     send_notify = load_send()
     if send_notify:
         if contents =='':
-            contents=f'信息获取失败，请检查账户信息以及青龙网络环境'
+            contents=f'签到失败，请检查账户信息以及网络环境'
+            send_notify(title, contents)
+            print(contents)
         send_notify(title, contents)
