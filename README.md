@@ -114,7 +114,7 @@ git clone https://github.com/hennessey-v/GlaDOS_Checkin_ql.git GlaDOS_Checkin
 <summary>二、配置cookie</summary>
 
 - 进入 GlaDOS_Checkin 文件夹，将cookie按照 **'koa:sess=xxxxxxxxx; koa:sess.sig=xxxx;'** 的格式填入 **config.py** ，多账号用 "," 分割
-
+ ![cookie](assets/cookies.png)
 </details>
 <details>
 <summary>三、运行脚本</summary>
