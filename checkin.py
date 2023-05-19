@@ -118,6 +118,5 @@ if __name__ == '__main__':
     if send_notify:
         if contents =='':
             contents=f'签到失败，请检查账户信息以及网络环境'
-            send_notify(title, contents)
             print(contents)
         send_notify(title, contents)
