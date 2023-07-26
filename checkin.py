@@ -4,10 +4,9 @@
 """
 File: checkin.py(GLaDOS签到)
 Author: Hennessey
-Date: 2023/3/22 18:59
 cron: 40 0 * * *
 new Env('GLaDOS签到');
-Update: 2023/5/7 优化信息输出效果,新增本地运行
+Update: 2023/7/26
 """
 
 

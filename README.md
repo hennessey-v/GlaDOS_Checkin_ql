@@ -69,15 +69,29 @@ GLaDOS家的优惠活动非常良心，新账号注册一段时间后基本都�
 ### qinglong 部署 (推荐)
 
 <details>
-<summary>一、在青龙面板中设置环境变量</summary>
+<summary>一、安装依赖</summary>
 
-![cookie](assets/GR_cookie.png)
+  - 打开青龙面板，依赖管理页面。切换到Python3模块，点击新建依赖，导入并安装依赖
+  ```
+  requests
+  ```
 
-- 多账号多次添加，运行脚本将自动遍历变量
+  ![cookie](assets/lib.png)
+
 </details>
 
 <details>
-<summary>二、在青龙中拉取本仓库</summary>
+<summary>二、在青龙面板中设置环境变量</summary>
+
+- 名称填入 **GR_COOKIE**， 值填入准备工作中账户的COOKIE。注：COOKIE需按 **'koa:sess=xxxxxxxxx; koa:sess.sig=xxxx;'** 的格式填入
+- 多账号多次添加变量
+
+![cookie](assets/GR_cookie.png)
+
+</details>
+
+<details>
+<summary>三、在青龙中拉取本仓库</summary>
 
 - 国内环境拉取指令（带代理）
 ```
@@ -90,7 +104,7 @@ ql repo https://github.com/hennessey-v/GlaDOS_Checkin_ql.git "checkin.py" "backU
 </details>
 
 <details>
-<summary>三、运行脚本查看运行结果</summary>
+<summary>四、运行脚本查看运行结果</summary>
 
 ![cookie](assets/push_detail.png)
 
@@ -110,14 +124,29 @@ git clone https://ghproxy.com/https://github.com/hennessey-v/GlaDOS_Checkin_ql.g
 git clone https://github.com/hennessey-v/GlaDOS_Checkin_ql.git GlaDOS_Checkin
 ```
 </details>
+
 <details>
-<summary>二、配置cookie</summary>
+<summary>二、安装依赖</summary>
+
+  - 进入项目目录输入以下命令
+  - 国内环境
+  ```
+  pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+  ```
+  - 国外环境
+  ```
+  pip install -r requirements.txt
+  ```
+</details>
+
+<details>
+<summary>三、配置cookie</summary>
 
 - 进入 GlaDOS_Checkin 文件夹，将cookie按照 **'koa:sess=xxxxxxxxx; koa:sess.sig=xxxx;'** 的格式填入 **config.py** ，多账号用 "," 分割
  ![cookie](assets/cookies.png)
 </details>
 <details>
-<summary>三、运行脚本</summary>
+<summary>四、运行脚本</summary>
 
 - 在GlaDOS_Checkin目录下，运行脚本
 ```
@@ -133,6 +162,14 @@ python checkin.py
 ## 更新日志
 <details>
 <summary>更新日志</summary>
+
+### [1.2.3] - 2023-7.26
+#### 变更
+- 文档增加安装依赖步骤
+
+### [1.2.2] - 2023-7.21
+#### 新增
+- 新增飞书等多种通知方式
 
 ### [1.2.1] - 2023-5-7
 #### 新增
