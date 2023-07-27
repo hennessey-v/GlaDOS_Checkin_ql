@@ -6,7 +6,7 @@ File: checkin.py(GLaDOS签到)
 Author: Hennessey
 cron: 40 0 * * *
 new Env('GLaDOS签到');
-Update: 2023/7/26
+Update: 2023/7/27
 """
 
 
@@ -61,7 +61,7 @@ def checkin(cookie):
     origin = "https://glados.rocks"
     useragent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36"
     payload={
-        'token': 'glados.network'
+        'token': 'glados.one'
     }
     try:
         checkin = requests.post(checkin_url,headers={
